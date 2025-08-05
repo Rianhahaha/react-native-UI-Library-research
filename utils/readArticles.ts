@@ -26,10 +26,10 @@ export interface Article {
 export async function readArticles(): Promise<Article[]> {
   try {
     const config = {
-      headers: { Authorization: process.env.BEARER_API_TOKEN },
+      headers: { Authorization: process.env.EXPO_PUBLIC_API_KEY },
     };
     const response = await axios.get(
-      "http://localhost:1337/api/articles",
+      process.env.EXPO_PUBLIC_API_URL+`/api/articles`,
       config
     );
     const articlesData = response?.data?.data ?? [];

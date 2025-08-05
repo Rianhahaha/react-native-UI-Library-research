@@ -8,6 +8,7 @@ export interface DetailedBlogs {
 export interface Blogs {
   id: number;
   title: string;
+  description: string;
 }
 
 export async function readBlogs(): Promise<Blogs[]> {
@@ -20,7 +21,9 @@ export async function readBlogs(): Promise<Blogs[]> {
       config
     );
     const blogsData = response?.data?.data ?? [];
+     console.log(blogsData);
     return blogsData;
+       
   } catch (error) {
     console.error(error);
     return [];
