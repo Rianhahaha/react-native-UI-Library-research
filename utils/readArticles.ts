@@ -21,6 +21,12 @@ export interface Article {
   title: string;
   description: string;
   slug: string;
+  cover: {
+    url: string;
+  };
+  category: {
+    name: string;
+  }
 }
 
 export async function readArticles(): Promise<Article[]> {
@@ -29,7 +35,7 @@ export async function readArticles(): Promise<Article[]> {
       headers: { Authorization: process.env.BEARER_API_TOKEN },
     };
     const response = await axios.get(
-      "http://localhost:1337/api/articles",
+      process.env.EXPO_PUBLIC_API_URL + "/api/articles?populate=*",
       config
     );
     const articlesData = response?.data?.data ?? [];
@@ -40,6 +46,8 @@ export async function readArticles(): Promise<Article[]> {
     return [];
   }
 }
+
+
 export async function readDetailedArticle(
   slug: string
 ): Promise<DetailedArticle | null> {
@@ -59,7 +67,7 @@ export async function readDetailedArticle(
       },
     };
     const response = await axios.get(
-      "http://localhost:1337/api/articles",
+      process.env.EXPO_PUBLIC_API_URL + "/api/articles",
       config
     );
     const DetailedArticleData = response?.data?.data?.[0];

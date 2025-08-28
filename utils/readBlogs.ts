@@ -8,6 +8,11 @@ export interface DetailedBlogs {
 export interface Blogs {
   id: number;
   title: string;
+  description: string;
+  createdAt: string;
+  cover: {
+    url: string;
+  };
 }
 
 export async function readBlogs(): Promise<Blogs[]> {
@@ -16,10 +21,11 @@ export async function readBlogs(): Promise<Blogs[]> {
       headers: { Authorization: process.env.BEARER_API_TOKEN },
     };
     const response = await axios.get(
-      "http://localhost:1337/api/blogs",
+      process.env.EXPO_PUBLIC_API_URL + "/api/blogs",
       config
     );
     const blogsData = response?.data?.data ?? [];
+
     return blogsData;
   } catch (error) {
     console.error(error);

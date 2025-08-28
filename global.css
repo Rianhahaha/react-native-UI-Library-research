@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-gradient-main {
+    @apply bg-gradient-to-bl  from-primary to-secondary;
+}
+
+.form-main {
+    @apply border border-primary bg-background-50;
+}
+.form-main > input {
+    @apply placeholder:text-white/50;
+}
